@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Ongoing Polls</title>
+    <link rel="stylesheet" href="{% static 'poll_style.css' %}">
+    <style>
+        .message-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .success-alert {
+            background: transparent;
+            color: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .close-button {
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            margin-left: 10px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        .no-polls-message-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="success-alert">
+                    {{message}}
+                    <button class="close-button" onclick="this.parentElement.style.display='none'">&times;</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="container">
+        <h1>Ongoing Polls</h1>
+        {% if polls %}
+            <div class="polls">
+                {% for poll in polls %}
+                    <div class="poll-box">
+                        <h2>{{poll.question}}</h2>
+                        <ul class="candidate-list">
+                            {% for candidate in poll.candidates.all %}
+                                <li>{{ candidate.name}} - {{ candidate.vote_set.count }} votes</li>
+                            {% endfor %}
+                        </ul>
+                       <form action="{% url 'vote' poll.id %}" method="post">
+                            {% csrf_token %}
+                                <button type="submit" class="vote-button">Vote</button>
+                       </form> 
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-polls-message-container">
+                <h3><p>No ongoing polls at the moment</p></h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

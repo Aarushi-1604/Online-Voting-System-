@@ -1,0 +1,26 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vote in Poll</title>
+    <link rel="stylesheet" href="{% static 'poll_style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{poll.question}}</h1>
+        <form action="{% url 'vote' poll.id%}" method="post">
+            {% csrf_token %}
+            <div class="candidates">
+                {% for candidate in candidates %}
+                    <label>
+                        <input type="radio" name="candidate" value="{{ candidate.id }}" required>
+                        {{ candidate.name }}
+                    </label><br>
+                {% endfor %}
+            </div>
+            <button type="submit" class="vote-button">Submit Vote</button>
+        </form>
+    </div>
+</body>
+</html>

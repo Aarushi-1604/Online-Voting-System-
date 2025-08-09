@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Online Voting System</title>
+    <link rel="stylesheet" href="{% static 'home_style.css' %}">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        .message-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .success-alert {
+            background: transparent;
+            color: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .close-button {
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            margin-left: 10px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="success-alert">
+                    {{message}}
+                    <button class="close-button" onclick="this.parentElement.style.display='none'">&times;</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <header class="header">
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class="bx bx-menu" id="menu-icon"></i>
+            <i class="bx bx-x" id="close-icon"></i>
+        </label>
+        <span class="brand">Online Voting</span>
+        <nav class="navbar">
+            <a href="{% url 'ongoing_polls' %}" style="--i:0;">Ongoing Polls</a>
+            <a href="#" style="--i:1;">Participate</a>
+            <a href="#" style="--i:2;">User Profile</a>
+        </nav>
+    </header>
+</body>
+</html>

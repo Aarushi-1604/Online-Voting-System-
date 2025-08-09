@@ -1,0 +1,66 @@
+@import url("https://fonts.googleleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    font-family: "Poppins",sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: url("poll_bg.gif") no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.polls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.poll-box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    font-size: 1.5em;
+
+}
+
+.candidate-list {
+    list-style: none;
+    padding: 0;
+}
+
+.vote-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.vote-button:hover {
+    background-color: #45a049;
+}
+
+.candidates label {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    display: block;
+}
